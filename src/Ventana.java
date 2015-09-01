@@ -12,21 +12,24 @@ import java.util.Vector;
  */
 public class Ventana extends JFrame {
 
-    private JPanel nuevoPanel;
-    private JPanel tablePanel;
+
+    private ListadoComprasPanel listadoComprasPanel;
+    private Catalogo panelACatalogo;
+    private Catalogo panelBCatalogo;
+
     private JTable table;
 
     private JMenuBar menuBar;
 
-    private JMenu archivo;
-    private JMenuItem nuevo;
-    private JMenuItem abrir;
-    private JMenuItem guardar;
-    private JMenuItem salir;
+    private JMenu carrito;
+    private JMenu catalogo;
+    private JMenu ayuda;
 
-    private JMenu help;
-    private JMenuItem ayuda;
-    private JMenuItem acerca;
+    private JMenuItem listadoCompras;
+    private JMenuItem salir;
+    private JMenuItem categoriaA;
+    private JMenuItem categoriaB;
+    private JMenuItem about;
 
     public Ventana() {
         init();
@@ -40,11 +43,12 @@ public class Ventana extends JFrame {
 
 
         this.setJMenuBar(menuBar);
-        tablePanel.add(table);
-        this.add(nuevoPanel);
-        this.add(tablePanel);
+        //tablePanel.add(table);
+        this.add(listadoComprasPanel);
+        this.add(panelACatalogo);
+        this.add(panelBCatalogo);
 
-        setTitle("Title");
+        setTitle("Portal de compras");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -54,51 +58,65 @@ public class Ventana extends JFrame {
     private void createMenuBar() {
         menuBar = new JMenuBar();
 
-        archivo = new JMenu("Archivo");
-        help = new JMenu("Help");
+        carrito = new JMenu("Carrito");
+        catalogo = new JMenu("Catalogo");
+        ayuda = new JMenu("Ayuda");
 
-        nuevo = new JMenuItem("Nuevo");
-        abrir = new JMenuItem("Abrir");
-        guardar = new JMenuItem("Guardar");
+        listadoCompras = new JMenuItem("Listado de compras");
         salir = new JMenuItem("Salir");
+        categoriaA = new JMenuItem("Categoria I");
+        categoriaB = new JMenuItem("Categoria II");
+        about = new JMenuItem("Sobre la aplicacion");
 
-        ayuda = new JMenuItem("Ayuda");
-        acerca = new JMenuItem("Acerca");
+        carrito.add(listadoCompras);
+        carrito.add(salir);
+        catalogo.add(categoriaA);
+        catalogo.add(categoriaB);
+        ayuda.add(about);
 
-        archivo.add(nuevo);
-        archivo.add(abrir);
-        archivo.add(guardar);
-        archivo.add(salir);
-
-        help.add(ayuda);
-        help.add(acerca);
-
-        menuBar.add(archivo);
-        menuBar.add(help);
+        menuBar.add(carrito);
+        menuBar.add(catalogo);
+        menuBar.add(ayuda);
     }
 
     private void createPanels() {
-        nuevoPanel = new JPanel();
-        nuevoPanel.setBackground(Color.cyan);
-
-        tablePanel = new JPanel();
-        tablePanel.setBackground(Color.green);
+        listadoComprasPanel = new ListadoComprasPanel();
+        panelACatalogo = new Catalogo(Color.darkGray);
+        panelBCatalogo = new Catalogo(Color.green);
     }
 
     public void setActionListener() {
-        nuevo.addActionListener(new ActionListener() {
+        listadoCompras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tablePanel.setVisible(false);
-                nuevoPanel.setVisible(true);
+                panelACatalogo.setVisible(false);
+                panelBCatalogo.setVisible(false);
+                listadoComprasPanel.setVisible(true);
             }
         });
 
-        abrir.addActionListener(new ActionListener() {
+        categoriaB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tablePanel.setVisible(true);
-                nuevoPanel.setVisible(false);
+                panelACatalogo.setVisible(false);
+                listadoComprasPanel.setVisible(false);
+                panelBCatalogo.setVisible(true);
+            }
+        });
+
+        categoriaA.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelBCatalogo.setVisible(false);
+                listadoComprasPanel.setVisible(false);
+                panelACatalogo.setVisible(true);
+            }
+        });
+
+        about.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Dessarrollado por Zielinski Leonardo", "Portal de compras info", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
