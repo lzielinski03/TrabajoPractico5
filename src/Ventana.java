@@ -1,23 +1,20 @@
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Vector;
-
+import java.util.List;
 /**
  * Created by lzielinski on 20/08/2015.
  */
 public class Ventana extends JFrame {
 
-
     private ListadoComprasPanel listadoComprasPanel;
     private Catalogo panelACatalogo;
     private Catalogo panelBCatalogo;
 
-    private JTable table;
+    private List<String> columnNames;
 
     private JMenuBar menuBar;
 
@@ -38,12 +35,10 @@ public class Ventana extends JFrame {
     private void init() {
         createMenuBar();
         createPanels();
-        createTable();
         setActionListener();
 
 
         this.setJMenuBar(menuBar);
-        //tablePanel.add(table);
         this.add(listadoComprasPanel);
         this.add(panelACatalogo);
         this.add(panelBCatalogo);
@@ -81,8 +76,21 @@ public class Ventana extends JFrame {
 
     private void createPanels() {
         listadoComprasPanel = new ListadoComprasPanel();
-        panelACatalogo = new Catalogo(Color.darkGray);
-        panelBCatalogo = new Catalogo(Color.green);
+
+        columnNames = new ArrayList<>();
+        columnNames.add("Producto");
+        columnNames.add("Precio");
+        columnNames.add("Cantidad");
+
+        try {
+            panelACatalogo = new Catalogo(Color.darkGray, columnNames);
+            panelBCatalogo = new Catalogo(Color.green, columnNames);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+
     }
 
     public void setActionListener() {
@@ -128,88 +136,4 @@ public class Ventana extends JFrame {
         });
     }
 
-    public void createTable() {
-        /*
-        TableModel tableModel = new AbstractTableModel() {
-            @Override
-            public int getRowCount() {
-                return 7;
-            }
-
-            @Override
-            public int getColumnCount() {
-                return 5;
-            }
-
-            @Override
-            public Object getValueAt(int rowIndex, int columnIndex) {
-                return null;
-            }
-        };*/
-
-        table = new JTable(new DynamicTableModel());
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        table.setFillsViewportHeight(true);
-        Object[] values = {"String", 10, 20.0, 30.2, new Boolean(false)};
-        DynamicTableModel a = (DynamicTableModel) table.getModel();
-        a.insertData(values);
-    }
-
-    public class DynamicTableModel extends AbstractTableModel {
-
-        private String[] columnNames;
-        private Vector data = new Vector();
-        public final Object[] longValues = {"", new Integer(20), new Float(20), new Float(20), Boolean.TRUE};
-
-        public DynamicTableModel() {
-            columnNames = new String[]{"Title 1", "Title 2", "Title 3", "Title 4", "Title 5"};
-        }
-
-        @Override
-        public int getRowCount() {
-            return data.size();
-        }
-
-        @Override
-        public int getColumnCount() {
-            return columnNames.length;
-        }
-
-        @Override
-        public Object getValueAt(int rowIndex, int columnIndex) {
-            return ((Vector) data.get(rowIndex)).get(columnIndex);
-        }
-
-        public String getColumnName(int col) {
-            return  columnNames[col];
-        }
-
-        public Class getColumnClass(int col) {
-            return getValueAt(0, col).getClass();
-        }
-
-        public void setValueAt(Object value, int row, int col) {
-            ((Vector) data.get(row)).setElementAt(value, col);
-            fireTableRowsInserted(row, col);
-        }
-
-        public boolean isCellEditable(int row, int col){
-            if (4 == col)
-                return true;
-            return false;
-        }
-
-        public void insertData(Object[] values){
-            data.add(new Vector());
-            for(int i =0; i<values.length; i++){
-                ((Vector) data.get(data.size()-1)).add(values[i]);
-            }
-            fireTableDataChanged();
-        }
-
-        public void removeRow(int row){
-            data.removeElementAt(row);
-            fireTableDataChanged();
-        }
-    }
 }

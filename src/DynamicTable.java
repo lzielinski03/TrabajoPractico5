@@ -1,14 +1,17 @@
 import javax.swing.table.AbstractTableModel;
+import java.util.Vector;
 
 /**
  * Created by lzielinski on 31/08/2015.
  */
 public class DynamicTable extends AbstractTableModel{
 
-    private String[] header;
+    public String[] m_colNames = { "First Name", "Last Name"};
+    private Vector body;
 
-    public DynamicTable(String[] header) {
-        this.header = header;
+    public DynamicTable(Vector body) {
+        super();
+        this.body = body;
     }
 
     @Override
@@ -18,7 +21,7 @@ public class DynamicTable extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 0;
+        return m_colNames.length;
     }
 
     @Override

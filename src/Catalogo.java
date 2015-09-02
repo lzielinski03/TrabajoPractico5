@@ -1,21 +1,34 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * Created by lzielinski on 31/08/2015.
  */
 public class Catalogo extends JPanel {
 
-    private JTable table;
-    private String[] header = { "First Name", "Last Name", "Sport", "# of Years", "Vegetarian" };
+    private CustomTable table;
+   // private JButton test;
 
-
-    public Catalogo(Color color){
+    public Catalogo(Color color, List<String> columnNames)throws Exception{
         this.setBackground(color);
-        table = new JTable(new DynamicTable(header));
-        //table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        table.setFillsViewportHeight(true);
-        table.setBackground(Color.magenta);
-        this.add(table);
+
+        table = new CustomTable(new CatalogoDataModel(columnNames));
+
+
+        /*
+        this.test = new JButton("test");
+
+        test.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("seee");
+
+            }
+        });
+        this.add(test);
+        */
+
+        this.add(new JScrollPane(table));
     }
 }
