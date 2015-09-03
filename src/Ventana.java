@@ -78,7 +78,7 @@ public class Ventana extends JFrame {
         listadoComprasPanel = new ListadoComprasPanel();
 
         columnNames = new ArrayList<>();
-        columnNames.add("Producto");
+        columnNames.add("model.ProductoModel");
         columnNames.add("Precio");
         columnNames.add("Cantidad");
 
