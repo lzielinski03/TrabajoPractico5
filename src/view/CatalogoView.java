@@ -1,44 +1,64 @@
 package view;
 
-import controller.ComprasController;
-import model.ProductoModel;
-import model.ProductoRefInterface;
-
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.Vector;
 
 /**
  * Created by lzielinski on 03/09/2015.
  */
-public class CatalogoView extends JPanel implements ProductoRefInterface {
+public class CatalogoView extends JPanel{
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5895058727735335153L;
+	
+	private static String LABEL_TITLE = "Catalogo";
+    private static final String BUTTON_BUY = "Comprar";
 
-    private static final String PANEL_TITLE = "Catalogo";
-    private static final String BUY_BUTTON = "Comprar";
-    private static final String[] TABLE_HEADERS = {"Producto", "Precio", "Cantidad"};
-
-    private JLabel titleLabel;
-    private JButton buyButton;
-
-    private ComprasController controller;
-
-    public CatalogoView(ProductoModel model) {
-        controller = new ComprasController(model);
-        createGui();
+    private JLabel labelTitle;
+    public JButton buttonBuy;
+    private JScrollPane tableBox;
+    private JTable jt;
+	private DefaultTableModel tableModel;
+	private String[] columns;
+	private String[][] tableData;
+    
+    public CatalogoView(String title, String[] columns, String[][] products) {
+		this.LABEL_TITLE = title;
+		this.columns = columns;
+		this.tableData = products;
+		init();
+    	this.setVisible(false);
     }
 
-    // model??
-    public CatalogoView(ProductoModel model, ComprasController controller) {
-        this.controller = controller;
-        createGui();
-    }
+	private void init() {
+		this.setLayout(null);
+		labelTitle = new JLabel(LABEL_TITLE);
+		buttonBuy = new JButton(BUTTON_BUY);
+		
+		labelTitle.setBounds(100, 20, 100, 50);
+		buttonBuy.setBounds(299, 370, 100, 30);
 
-    public void createGui() {
+		createTable();
+		tableBox.setBounds(100, 60, 300, 300);
 
-    }
+		this.add(tableBox); 
+		this.add(labelTitle);
+		this.add(buttonBuy);
+	}
 
-    @Override
-    public void refresh(String name, Double precio) {
+	public void createTable() {
+		tableModel = new DefaultTableModel(tableData, columns);
+		jt = new JTable(tableModel);
+		tableBox = new JScrollPane(jt);
+	}
 
-    }
+	public void setTableData(String[][] products) {
+		tableModel.setDataVector(products, columns);
+	}
+
+	public Vector getTableData() {
+		return tableModel.getDataVector();
+	}
+	
+
 }

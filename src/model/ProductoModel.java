@@ -10,33 +10,10 @@ public class ProductoModel {
 
     private String name;
     private Double precio;
-    private ArrayList productoViews = new ArrayList();
 
-    public ProductoModel() {
-        this(null);
-    }
-
-    public ProductoModel(ProductoRefInterface view) {
-        this.name = "";
-        this.precio = 0.0;
-        if (view != null)
-            productoViews.add(view);
-    }
-
-    public void updateView() {
-
-    }
-
-    public void updateModel(){
-
-    }
-
-    public void addView(ProductoRefInterface view){
-
-    }
-
-    public void removeView() {
-
+    public ProductoModel(String name, Double precio) {
+        this.name = name;
+        this.precio = precio;
     }
 
     public String getName() {
