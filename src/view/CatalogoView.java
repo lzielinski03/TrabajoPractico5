@@ -26,7 +26,7 @@ public class CatalogoView extends JPanel{
 		this.columns = columns;
 		this.tableData = products;
 		init();
-        this.setVisible(false);
+        //this.setVisible(true);
     }
 
 	private void init() {
@@ -47,7 +47,20 @@ public class CatalogoView extends JPanel{
 
 	public void createTable() {
 		tableModel = new DefaultTableModel(tableData, columns);
-		jt = new JTable(tableModel);
+		jt = new JTable(tableModel) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				switch (column) {
+					case 0:
+					case 1:
+						return false;
+					case 2:
+						return true;
+					default:
+						return false;
+				}
+			}
+		};
 		tableBox = new JScrollPane(jt);
 	}
 

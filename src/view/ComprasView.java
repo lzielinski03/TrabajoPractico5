@@ -29,7 +29,7 @@ public class ComprasView extends JPanel{
 		this.columns = columns;
 		this.tableData = new String[0][0];
     	init();
-        this.setVisible(true);
+        //this.setVisible(true);
     }
 
 	private void init() {
@@ -54,9 +54,17 @@ public class ComprasView extends JPanel{
 
 	public void createTable() {
 		tableModel = new DefaultTableModel(tableData, columns);
-		jt = new JTable(tableModel);
+		jt = new JTable(tableModel){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
 		tableBox = new JScrollPane(jt);
 	}
+
+
 
 	public void setTableData(String[][] products) {
         resetTableData();
@@ -65,6 +73,7 @@ public class ComprasView extends JPanel{
 
     public void resetTableData() {
         tableModel.setDataVector(null, columns);
+		labelTotal.setText(LABEL_TOTAL);
     }
 
     public void setTotal(Double total) {

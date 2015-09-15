@@ -4,6 +4,7 @@ import data.CatalogoA;
 import data.CatalogoB;
 import view.MainFrame;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +12,7 @@ import java.awt.event.ActionListener;
  * @author lzielinski
  *
  */
-public class MainController {
+public class MainController implements ActionListener{
 
 	MainFrame mainView;
 
@@ -30,52 +31,42 @@ public class MainController {
 		catalogoB = new CatalogoController("Catalogo B", new CatalogoB().getProducts(), this);
         compras = new ComprasController();
 
-		setActionsListeners();
+		setElementsListeners();
 
         mainView.add(compras.getView());
 		mainView.add(catalogoA.getView());
 		mainView.add(catalogoB.getView());
-        mainView.setVisible(true);
+
+		dispalyView(compras.getView());
+		mainView.setVisible(true);
 	}
 
-    public void addToCompras(String[][] tableData) {
+	private void setElementsListeners() {
+		mainView.topMenu.listadoCompras.addActionListener(this);
+		mainView.topMenu.categoriaA.addActionListener(this);
+		mainView.topMenu.categoriaB.addActionListener(this);
+	}
+
+	public void addToCompras(String[][] tableData) {
         compras.addTableData(tableData);
-        showCompras();
+		dispalyView(compras.getView());
     }
 
-	public void showCompras() {
-		catalogoA.getView().setVisible(false);
-		catalogoB.getView().setVisible(false);
-		compras.getView().setVisible(true);
+	public void dispalyView(JPanel view) {
+		mainView.setContentPane(view);
+		mainView.repaint();
+		mainView.printAll(mainView.getGraphics());
 	}
 
-	private void setActionsListeners() {
-
-		mainView.topMenu.listadoCompras.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				catalogoA.getView().setVisible(false);
-				catalogoB.getView().setVisible(false);
-				compras.getView().setVisible(true);
-			}
-		});
-
-		mainView.topMenu.categoriaA.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				catalogoB.getView().setVisible(false);
-				compras.getView().setVisible(false);
-				catalogoA.getView().setVisible(true);
-			}
-		});
-
-		mainView.topMenu.categoriaB.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				compras.getView().setVisible(false);
-				catalogoA.getView().setVisible(false);
-				catalogoB.getView().setVisible(true);
-			}
-		});
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mainView.topMenu.listadoCompras) {
+			dispalyView(compras.getView());
+		} else if (e.getSource() == mainView.topMenu.categoriaA) {
+			dispalyView(catalogoA.getView());
+		} else if (e.getSource() == mainView.topMenu.categoriaB) {
+			dispalyView(catalogoB.getView());
+		}
 	}
+
 }

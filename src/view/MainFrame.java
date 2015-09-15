@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.CardLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +23,8 @@ public class MainFrame extends JFrame{
 
 	private void init() {
 		setTitle("Portal de compras");
-        this.setLayout(new CardLayout());
+        //this.setLayout(new CardLayout());
+		this.setLayout(new FlowLayout());
         setSize(500, 500);
 		setResizable(false);
         setLocationRelativeTo(null);
@@ -36,7 +37,7 @@ public class MainFrame extends JFrame{
 	}
 
     public void errorMessage(String message) {
-        JOptionPane.showMessageDialog(null, message, "Portal de compras info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Portal de compras info", JOptionPane.WARNING_MESSAGE);
     }
 
 	public class MenuBar extends JMenuBar{
