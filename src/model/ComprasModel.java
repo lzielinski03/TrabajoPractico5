@@ -9,24 +9,47 @@ import java.util.List;
 public class ComprasModel {
 
     private final String[] columns = {"Producto", "Cantidad", "Precio"};
-    private List<ProductoModel> products = new ArrayList<>();
+    private List<Articulo> articulos = new ArrayList<>();
 
-    public void setProducts(List<ProductoModel> dataTable) {
-        this.products = dataTable;
+    private Double total;
+
+    public void setArticulos(String[][] dataTable) {
+        articulos.clear();
+        for (String[] row : dataTable) {
+            int cantidad = Double.valueOf(row[2]).intValue();
+            Double precio = Double.valueOf(row[1]) * Double.valueOf(row[2]);
+            articulos.add(new Articulo(row[0], cantidad, precio));
+        }
     }
+
 
     public String[] getColumns() {
         return columns;
     }
 
-    public String[][] getProducts() {
-        String[][] data = new String[products.size()][3];
+    public String[][] getArticulos() {
+        String[][] data = new String[articulos.size()][3];
 
-        for (int i = 0; i < products.size(); i++) {
-            data[i][0] = products.get(i).getName();
-            data[i][1] = products.get(i).getPrecio().toString();
-            data[i][2] = "0";
+        for (int i = 0; i < articulos.size(); i++) {
+            data[i][0] = articulos.get(i).getArticuloName();
+            data[i][1] = String.valueOf(articulos.get(i).getCantidad());
+            data[i][2] = articulos.get(i).getPrecio().toString();
         }
         return data;
+    }
+
+    public void addArticulos(String[][] tableData) {
+        for (String[] row : tableData) {
+            int cantidad = Double.valueOf(row[2]).intValue();
+            Double precio = Double.valueOf(row[1]) * Double.valueOf(row[2]);
+            articulos.add(new Articulo(row[0], cantidad, precio));
+        }
+    }
+
+    public Double getTotal() {
+        total = 0.0;
+        for (Articulo art : articulos)
+            total += art.getPrecio();
+        return total;
     }
 }

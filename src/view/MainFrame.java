@@ -1,11 +1,5 @@
 package view;
 
-import controller.CatalogoController;
-import controller.ComprasController;
-import data.CatalogoA;
-import data.CatalogoB;
-import sun.applet.Main;
-
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,13 +14,8 @@ public class MainFrame extends JFrame{
 
 	private static final long serialVersionUID = 8456560429229699542L;
 
-		
 	public MenuBar topMenu;
-/*
-	private CatalogoController catalogoA;
-	private CatalogoController catalogoB;
-	private ComprasController compras;
-*/
+
 	public MainFrame(){
 		createGUI();
 		init();
@@ -34,60 +23,17 @@ public class MainFrame extends JFrame{
 
 	private void init() {
 		setTitle("Portal de compras");
+        this.setLayout(new CardLayout());
         setSize(500, 500);
 		setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setLayout(new CardLayout());
-        this.setVisible(true);
 	}
 	
 	private void createGUI() {
-/*
-		catalogoA = new CatalogoController("Catalogo A", new CatalogoA().getProducts());
-		catalogoB = new CatalogoController("Catalogo B", new CatalogoB().getProducts());
-		compras = new ComprasController();
-
-		this.add(catalogoA.getView());
-		this.add(catalogoB.getView());
-		this.add(compras.getView());
-*/
 		topMenu = new MenuBar();
-		//setActionsListeners();
 		this.setJMenuBar(topMenu);
 	}
-	/*
-	private void setActionsListeners() {
-		
-		topMenu.listadoCompras.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				catalogoA.getView().setVisible(false);
-				catalogoB.getView().setVisible(false);
-				compras.getView().setVisible(true);
-			}
-		});
-		
-		topMenu.categoriaA.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				catalogoB.getView().setVisible(false);
-				compras.getView().setVisible(false);
-				catalogoA.getView().setVisible(true);
-			}
-		});
-		
-		topMenu.categoriaB.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				compras.getView().setVisible(false);
-				catalogoA.getView().setVisible(false);
-				catalogoB.getView().setVisible(true);
-			}
-		});
-	}
-*/
-
 
 	public class MenuBar extends JMenuBar{
 

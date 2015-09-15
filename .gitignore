@@ -61,7 +61,6 @@ local.properties
 # Cloud9 IDE
 # =========
 .c9/
-data/
 mongod
 
 

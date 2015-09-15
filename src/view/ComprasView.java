@@ -17,19 +17,20 @@ public class ComprasView extends JPanel{
 
     private JLabel labelTitle;
     private JLabel labelTotal;
-    private JButton buttonClear;
+    public JButton buttonClear;
 
 	private JScrollPane tableBox;
 	private JTable jt;
 	private DefaultTableModel tableModel;
 	private String[] columns;
 	private String[][] tableData;
-    
+    private Double total;
+
     public ComprasView(String[] columns) {
 		this.columns = columns;
 		this.tableData = new String[0][0];
     	init();
-		this.setVisible(true);
+        this.setVisible(true);
     }
 
 	private void init() {
@@ -45,7 +46,6 @@ public class ComprasView extends JPanel{
 
 		createTable();
 		tableBox.setBounds(100, 60, 300, 300);
-
 
 		this.add(tableBox);
 		this.add(labelTitle);
@@ -64,6 +64,10 @@ public class ComprasView extends JPanel{
 	}
 
 	public Vector getTableData() {
-		return tableModel.getDataVector();
+        return tableModel.getDataVector();
 	}
+
+    public void setTotal(Double total) {
+        labelTotal.setText(LABEL_TOTAL + total.toString());
+    }
 }

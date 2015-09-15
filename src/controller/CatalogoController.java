@@ -1,7 +1,7 @@
 package controller;
 
 import model.CatalogoModel;
-import model.ProductoModel;
+import model.Producto;
 import view.CatalogoView;
 
 import java.awt.event.ActionEvent;
@@ -15,25 +15,8 @@ public class CatalogoController {
 
     private CatalogoView view;
     private CatalogoModel model;
-/*
-    public CatalogoController(String title, List<ProductoModel> data) {
-        model = new CatalogoModel();
-        model.setProducts(data);
-        view = new CatalogoView(title, model.getColumns(), model.getProducts());
 
-        view.buttonBuy.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (Object x : view.getTableData()) {
-                    System.out.println(x.toString());
-                }
-                System.out.println();
-                view.setTableData(model.getProducts());
-            }
-        });
-    }
-*/
-    public CatalogoController(String title, List<ProductoModel> products, final MainController mainController) {
+    public CatalogoController(String title, List<Producto> products, final MainController mainController) {
         model = new CatalogoModel();
         model.setProducts(products);
         view = new CatalogoView(title, model.getColumns(), model.getProducts());
@@ -41,28 +24,25 @@ public class CatalogoController {
         view.buttonBuy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (Object x : view.getTableData()) {
-                    System.out.println(x.toString());
-                }
-                System.out.println();
+                String[][] data = view.getTableData();
+                /*
+                if (validate(data)) {
+
+                }*/
+                mainController.addToCompras(view.getTableData());
                 view.setTableData(model.getProducts());
-                mainController.showComprasView();
             }
         });
     }
-
-
-    public void addView(){
+/*
+    private boolean validate(String[][] data) {
+        for (String[] x : data) {
+            int cant = Integer.valueOf(x[3]);
+            if (cant)
+        }
+        return false;
     }
-
-    public void removeView() {
-    }
-
-    public void updateView() {
-    }
-
-    public void updateModel(){
-    }
+*/
 
     public CatalogoView getView() {
         return view;

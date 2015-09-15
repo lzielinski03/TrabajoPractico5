@@ -2,7 +2,6 @@ package view;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.Vector;
 
 /**
  * Created by lzielinski on 03/09/2015.
@@ -27,7 +26,7 @@ public class CatalogoView extends JPanel{
 		this.columns = columns;
 		this.tableData = products;
 		init();
-    	this.setVisible(false);
+        this.setVisible(false);
     }
 
 	private void init() {
@@ -56,8 +55,15 @@ public class CatalogoView extends JPanel{
 		tableModel.setDataVector(products, columns);
 	}
 
-	public Vector getTableData() {
-		return tableModel.getDataVector();
+	public String[][] getTableData() {
+        String[][] products = new String[tableModel.getRowCount()][tableModel.getColumnCount()];
+        for(int i = 0; i < tableModel.getRowCount(); i++) {
+            for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                products[i][j] = tableModel.getValueAt(i, j).toString();
+            }
+        }
+        System.out.println("column: " + tableModel.getColumnCount() + "\t row: " + tableModel.getRowCount());
+		return products;
 	}
 	
 

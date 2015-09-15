@@ -31,16 +31,22 @@ public class MainController {
 
 		catalogoA = new CatalogoController("Catalogo A", new CatalogoA().getProducts(), this);
 		catalogoB = new CatalogoController("Catalogo B", new CatalogoB().getProducts(), this);
-		compras = new ComprasController();
+        compras = new ComprasController();
 
 		setActionsListeners();
 
+        mainView.add(compras.getView());
 		mainView.add(catalogoA.getView());
 		mainView.add(catalogoB.getView());
-		mainView.add(compras.getView());
+        mainView.setVisible(true);
 	}
 
-	public void showComprasView() {
+    public void addToCompras(String[][] tableData) {
+        compras.addTableData(tableData);
+        showCompras();
+    }
+
+	public void showCompras() {
 		catalogoA.getView().setVisible(false);
 		catalogoB.getView().setVisible(false);
 		compras.getView().setVisible(true);

@@ -9,9 +9,9 @@ import java.util.List;
 public class CatalogoModel {
 
     private final String[] columns = {"Producto", "Precio", "Cantidad"};
-    private List<ProductoModel> products = new ArrayList<>();
+    private List<Producto> products = new ArrayList<>();
 
-    public void setProducts(List<ProductoModel> dataTable) {
+    public void setProducts(List<Producto> dataTable) {
         this.products = dataTable;
     }
 
