@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lzielinski on 14/09/2015.
+ * Created by lzielinski
  */
 public class CatalogoModel {
 
@@ -29,4 +29,5 @@ public class CatalogoModel {
         }
         return data;
     }
+
 }

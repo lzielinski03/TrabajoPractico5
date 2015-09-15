@@ -35,6 +35,10 @@ public class MainFrame extends JFrame{
 		this.setJMenuBar(topMenu);
 	}
 
+    public void errorMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "Portal de compras info", JOptionPane.INFORMATION_MESSAGE);
+    }
+
 	public class MenuBar extends JMenuBar{
 
 		private static final long serialVersionUID = 7220874092704020351L;
@@ -95,5 +99,4 @@ public class MainFrame extends JFrame{
 
 		}
 	}
-	
 }

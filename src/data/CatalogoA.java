@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by cueva on 14/09/15.
+ * Created by lzielinski
  */
 public class CatalogoA {
 

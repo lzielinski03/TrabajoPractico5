@@ -25,24 +25,38 @@ public class CatalogoController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String[][] data = view.getTableData();
-                /*
-                if (validate(data)) {
 
-                }*/
-                mainController.addToCompras(view.getTableData());
-                view.setTableData(model.getProducts());
+                if (validate(data)) {
+                    mainController.addToCompras(data);
+                    view.setTableData(model.getProducts());
+                } else {
+                    view.resetTableData();
+                    mainController.mainView.errorMessage("La cantidad de productos solo admite numeros enteros!");
+                }
             }
         });
     }
-/*
+
     private boolean validate(String[][] data) {
-        for (String[] x : data) {
-            int cant = Integer.valueOf(x[3]);
-            if (cant)
+        boolean aux = false;
+
+        try {
+            for (String[] x : data) {
+                aux = false;
+                int cant = Integer.valueOf(x[2]);
+
+                if (cant <= 0) {
+
+                }
+                aux = true;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Exception: " + e.getMessage());
         }
-        return false;
+
+        return aux;
     }
-*/
+
 
     public CatalogoView getView() {
         return view;

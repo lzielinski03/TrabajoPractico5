@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Created by lzielinski on 03/09/2015.
+ * Created by lzielinski
  */
 public class CatalogoView extends JPanel{
 
@@ -52,8 +52,9 @@ public class CatalogoView extends JPanel{
 	}
 
 	public void setTableData(String[][] products) {
-		tableModel.setDataVector(products, columns);
-	}
+        resetTableData();
+        tableModel.setDataVector(products, columns);
+    }
 
 	public String[][] getTableData() {
         String[][] products = new String[tableModel.getRowCount()][tableModel.getColumnCount()];
@@ -62,9 +63,10 @@ public class CatalogoView extends JPanel{
                 products[i][j] = tableModel.getValueAt(i, j).toString();
             }
         }
-        System.out.println("column: " + tableModel.getColumnCount() + "\t row: " + tableModel.getRowCount());
 		return products;
 	}
-	
 
+    public void resetTableData() {
+        tableModel.setDataVector(tableData, columns);
+    }
 }

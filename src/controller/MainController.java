@@ -8,10 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * 
  * @author lzielinski
- * 
- * Cargar en el mainFrame los modelos, vistas y controladores de toda la app
  *
  */
 public class MainController {

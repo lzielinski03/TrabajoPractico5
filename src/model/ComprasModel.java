@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lzielinski on 14/09/2015.
+ * Created by lzielinski
  */
 public class ComprasModel {
 
@@ -12,16 +12,6 @@ public class ComprasModel {
     private List<Articulo> articulos = new ArrayList<>();
 
     private Double total;
-
-    public void setArticulos(String[][] dataTable) {
-        articulos.clear();
-        for (String[] row : dataTable) {
-            int cantidad = Double.valueOf(row[2]).intValue();
-            Double precio = Double.valueOf(row[1]) * Double.valueOf(row[2]);
-            articulos.add(new Articulo(row[0], cantidad, precio));
-        }
-    }
-
 
     public String[] getColumns() {
         return columns;
@@ -44,6 +34,10 @@ public class ComprasModel {
             Double precio = Double.valueOf(row[1]) * Double.valueOf(row[2]);
             articulos.add(new Articulo(row[0], cantidad, precio));
         }
+    }
+
+    public void deleteArticulos() {
+        articulos.clear();
     }
 
     public Double getTotal() {

@@ -24,7 +24,6 @@ public class ComprasView extends JPanel{
 	private DefaultTableModel tableModel;
 	private String[] columns;
 	private String[][] tableData;
-    private Double total;
 
     public ComprasView(String[] columns) {
 		this.columns = columns;
@@ -60,12 +59,13 @@ public class ComprasView extends JPanel{
 	}
 
 	public void setTableData(String[][] products) {
+        resetTableData();
 		tableModel.setDataVector(products, columns);
 	}
 
-	public Vector getTableData() {
-        return tableModel.getDataVector();
-	}
+    public void resetTableData() {
+        tableModel.setDataVector(null, columns);
+    }
 
     public void setTotal(Double total) {
         labelTotal.setText(LABEL_TOTAL + total.toString());

@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by cueva on 15/09/15.
+ * Created by cueva
  */
 public class Articulo {
 
@@ -19,23 +19,12 @@ public class Articulo {
         return articuloName;
     }
 
-    public void setArticuloName(String articuloName) {
-        this.articuloName = articuloName;
-    }
-
     public int getCantidad() {
         return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
     }
 
     public Double getPrecio() {
         return Precio;
     }
 
-    public void setPrecio(Double precio) {
-        Precio = precio;
-    }
 }
