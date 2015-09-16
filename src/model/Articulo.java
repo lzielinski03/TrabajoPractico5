@@ -7,12 +7,12 @@ public class Articulo {
 
     private String articuloName;
     private int cantidad;
-    private Double Precio;
+    private Double precio;
 
     public Articulo(String articuloName, int cantidad, Double precio) {
         this.articuloName = articuloName;
-        this.cantidad = cantidad;
-        Precio = precio;
+        this.setCantidad(cantidad);
+        this.precio = precio;
     }
 
     public String getArticuloName() {
@@ -24,7 +24,14 @@ public class Articulo {
     }
 
     public Double getPrecio() {
-        return Precio;
+        return precio;
     }
 
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
 }

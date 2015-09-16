@@ -25,10 +25,21 @@ public class ComprasModel {
 
     public void addArticulos(String[][] tableData) {
         for (String[] row : tableData) {
+
             int cantidad = Double.valueOf(row[2]).intValue();
             Double precio = Double.valueOf(row[1]) * Double.valueOf(row[2]);
-            precio = (double) (Math.round(precio * 100) / 100);
-            articulos.add(new Articulo(row[0], cantidad, precio));
+
+            boolean exists = false;
+
+            for (Articulo art : articulos) {
+                if (art.getArticuloName().equals(row[0])){
+                    art.setCantidad(art.getCantidad() + cantidad);
+                    art.setPrecio(art.getCantidad() * precio);
+                    exists = true;
+                }
+            }
+            if (!exists)
+                articulos.add(new Articulo(row[0], cantidad, precio));
         }
     }
 
