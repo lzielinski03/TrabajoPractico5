@@ -4,7 +4,6 @@ import data.CatalogoA;
 import data.CatalogoB;
 import view.MainFrame;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class MainController implements ActionListener{
 
-	MainFrame mainView;
+	private MainFrame mainView;
 
 	private CatalogoController catalogoA;
 	private CatalogoController catalogoB;
@@ -24,49 +23,48 @@ public class MainController implements ActionListener{
 		init();
 	}
 
-	public void init() {
+    private void init() {
 		mainView = new MainFrame();
 
+        // add list<SuperClass>
 		catalogoA = new CatalogoController("Catalogo A", new CatalogoA().getProducts(), this);
 		catalogoB = new CatalogoController("Catalogo B", new CatalogoB().getProducts(), this);
         compras = new ComprasController();
 
 		setElementsListeners();
 
+        // iterar
         mainView.add(compras.getView());
 		mainView.add(catalogoA.getView());
 		mainView.add(catalogoB.getView());
 
-		dispalyView(compras.getView());
+        mainView.dispalyView(compras.getView());
 		mainView.setVisible(true);
 	}
 
 	private void setElementsListeners() {
-		mainView.topMenu.listadoCompras.addActionListener(this);
-		mainView.topMenu.categoriaA.addActionListener(this);
-		mainView.topMenu.categoriaB.addActionListener(this);
+		mainView.topMenu.getListadoCompras().addActionListener(this);
+		mainView.topMenu.getCategoriaA().addActionListener(this);
+		mainView.topMenu.getCategoriaB().addActionListener(this);
 	}
 
-	public void addToCompras(String[][] tableData) {
+	protected void addToCompras(String[][] tableData) {
         compras.addTableData(tableData);
-		dispalyView(compras.getView());
+        mainView.dispalyView(compras.getView());
     }
-
-	public void dispalyView(JPanel view) {
-		mainView.setContentPane(view);
-		mainView.repaint();
-		mainView.printAll(mainView.getGraphics());
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == mainView.topMenu.listadoCompras) {
-			dispalyView(compras.getView());
-		} else if (e.getSource() == mainView.topMenu.categoriaA) {
-			dispalyView(catalogoA.getView());
-		} else if (e.getSource() == mainView.topMenu.categoriaB) {
-			dispalyView(catalogoB.getView());
+		if (e.getSource() == mainView.topMenu.getListadoCompras()) {
+            mainView.dispalyView(compras.getView());
+		} else if (e.getSource() == mainView.topMenu.getCategoriaA()) {
+            mainView.dispalyView(catalogoA.getView());
+		} else if (e.getSource() == mainView.topMenu.getCategoriaB()) {
+            mainView.dispalyView(catalogoB.getView());
 		}
 	}
 
+    public void message(String message, int type) {
+        this.mainView.message(message, type);
+    }
 }

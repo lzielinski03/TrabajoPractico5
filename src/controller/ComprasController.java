@@ -23,7 +23,6 @@ public class ComprasController{
             public void actionPerformed(ActionEvent actionEvent) {
                 view.resetTableData();
                 model.deleteArticulos();
-
             }
         });
 	}

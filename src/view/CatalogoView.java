@@ -14,7 +14,8 @@ public class CatalogoView extends JPanel{
     private static final String BUTTON_BUY = "Comprar";
 
     private JLabel labelTitle;
-    public JButton buttonBuy;
+    private JButton buttonBuy;
+
     private JScrollPane tableBox;
     private JTable jt;
 	private DefaultTableModel tableModel;
@@ -26,7 +27,6 @@ public class CatalogoView extends JPanel{
 		this.columns = columns;
 		this.tableData = products;
 		init();
-        //this.setVisible(true);
     }
 
 	private void init() {
@@ -44,6 +44,10 @@ public class CatalogoView extends JPanel{
 		this.add(labelTitle);
 		this.add(buttonBuy);
 	}
+
+    public JButton getButtonBuy() {
+        return buttonBuy;
+    }
 
 	public void createTable() {
 		tableModel = new DefaultTableModel(tableData, columns);
@@ -63,11 +67,6 @@ public class CatalogoView extends JPanel{
 		};
 		tableBox = new JScrollPane(jt);
 	}
-
-	public void setTableData(String[][] products) {
-        resetTableData();
-        tableModel.setDataVector(products, columns);
-    }
 
 	public String[][] getTableData() {
         String[][] products = new String[tableModel.getRowCount()][tableModel.getColumnCount()];

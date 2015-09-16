@@ -4,11 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class MainFrame extends JFrame{
 
@@ -23,7 +19,6 @@ public class MainFrame extends JFrame{
 
 	private void init() {
 		setTitle("Portal de compras");
-        //this.setLayout(new CardLayout());
 		this.setLayout(new FlowLayout());
         setSize(500, 500);
 		setResizable(false);
@@ -36,8 +31,14 @@ public class MainFrame extends JFrame{
 		this.setJMenuBar(topMenu);
 	}
 
-    public void errorMessage(String message) {
-        JOptionPane.showMessageDialog(null, message, "Portal de compras info", JOptionPane.WARNING_MESSAGE);
+    public void dispalyView(JPanel view) {
+        this.setContentPane(view);
+        this.repaint();
+        this.printAll(this.getGraphics());
+    }
+
+    public void message(String message, int type) {
+        JOptionPane.showMessageDialog(null, message, "Portal de compras info", type);
     }
 
 	public class MenuBar extends JMenuBar{
@@ -48,10 +49,10 @@ public class MainFrame extends JFrame{
 	    private JMenu catalogo;
 	    private JMenu ayuda;
 
-	    public JMenuItem listadoCompras;
+	    private JMenuItem listadoCompras;
 		private JMenuItem salir;
-		public JMenuItem categoriaA;
-		public JMenuItem categoriaB;
+		private JMenuItem categoriaA;
+		private JMenuItem categoriaB;
 	    private JMenuItem about;
 
 	    public MenuBar(){
@@ -63,18 +64,18 @@ public class MainFrame extends JFrame{
 	        catalogo = new JMenu("Catalogo");
 	        ayuda = new JMenu("Ayuda");
 
-	        listadoCompras = new JMenuItem("Listado de compras");
+	        setListadoCompras(new JMenuItem("Listado de compras"));
 	        salir = new JMenuItem("Salir");
-	        categoriaA = new JMenuItem("Categoria I");
-	        categoriaB = new JMenuItem("Categoria II");
+	        setCategoriaA(new JMenuItem("Categoria I"));
+	        setCategoriaB(new JMenuItem("Categoria II"));
 	        about = new JMenuItem("Sobre la aplicacion");
 
 	        setActionListener();
 
-	        carrito.add(listadoCompras);
+	        carrito.add(getListadoCompras());
 	        carrito.add(salir);
-	        catalogo.add(categoriaA);
-	        catalogo.add(categoriaB);
+	        catalogo.add(getCategoriaA());
+	        catalogo.add(getCategoriaB());
 	        ayuda.add(about);
 
 	        this.add(carrito);
@@ -99,5 +100,29 @@ public class MainFrame extends JFrame{
 			});
 
 		}
-	}
+
+        public JMenuItem getListadoCompras() {
+            return listadoCompras;
+        }
+
+        public void setListadoCompras(JMenuItem listadoCompras) {
+            this.listadoCompras = listadoCompras;
+        }
+
+        public JMenuItem getCategoriaA() {
+            return categoriaA;
+        }
+
+        public void setCategoriaA(JMenuItem categoriaA) {
+            this.categoriaA = categoriaA;
+        }
+
+        public JMenuItem getCategoriaB() {
+            return categoriaB;
+        }
+
+        public void setCategoriaB(JMenuItem categoriaB) {
+            this.categoriaB = categoriaB;
+        }
+    }
 }

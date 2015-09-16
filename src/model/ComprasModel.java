@@ -13,13 +13,8 @@ public class ComprasModel {
 
     private Double total;
 
-    public String[] getColumns() {
-        return columns;
-    }
-
     public String[][] getArticulos() {
         String[][] data = new String[articulos.size()][3];
-
         for (int i = 0; i < articulos.size(); i++) {
             data[i][0] = articulos.get(i).getArticuloName();
             data[i][1] = String.valueOf(articulos.get(i).getCantidad());
@@ -32,12 +27,17 @@ public class ComprasModel {
         for (String[] row : tableData) {
             int cantidad = Double.valueOf(row[2]).intValue();
             Double precio = Double.valueOf(row[1]) * Double.valueOf(row[2]);
+            precio = (double) (Math.round(precio * 100) / 100);
             articulos.add(new Articulo(row[0], cantidad, precio));
         }
     }
 
     public void deleteArticulos() {
         articulos.clear();
+    }
+
+    public String[] getColumns() {
+        return columns;
     }
 
     public Double getTotal() {

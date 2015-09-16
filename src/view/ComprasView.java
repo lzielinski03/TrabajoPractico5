@@ -29,7 +29,6 @@ public class ComprasView extends JPanel{
 		this.columns = columns;
 		this.tableData = new String[0][0];
     	init();
-        //this.setVisible(true);
     }
 
 	private void init() {
@@ -40,7 +39,7 @@ public class ComprasView extends JPanel{
 		buttonClear = new JButton(BUTTON_CLEAR);
 
 		labelTitle.setBounds(100, 20, 200, 50);
-		labelTotal.setBounds(100, 350, 100, 50);
+		labelTotal.setBounds(100, 350, 300, 50);
 		buttonClear.setBounds(299, 370, 100, 30);
 
 		createTable();
@@ -60,11 +59,8 @@ public class ComprasView extends JPanel{
 				return false;
 			}
 		};
-
 		tableBox = new JScrollPane(jt);
 	}
-
-
 
 	public void setTableData(String[][] products) {
         resetTableData();
